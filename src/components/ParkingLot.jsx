@@ -6,7 +6,7 @@ const ParkingLot = ({ parkingLot }) => {
     <Box
       sx={{
         padding: 2,
-        width: "30%",
+        width: "100%",
         border: "1px solid lightblue",
         margin: 1,
       }}
@@ -32,7 +32,8 @@ const ParkingLot = ({ parkingLot }) => {
                 border: "1px solid lightblue",
                 textAlign: "center",
                 margin: 0,
-                padding: 0,
+                padding: "2px",
+                boxSizing: "border-box",
                 "&:nth-of-type(3n + 1)": {
                   borderLeft: "none",
                 },

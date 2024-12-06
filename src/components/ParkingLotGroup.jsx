@@ -26,9 +26,9 @@ const ParkingLotGroup = () => {
         <Box
           key={parkingLot.name}
           sx={{
-            flex: "1 1 25%", // Adjust the percentage to control the width
-            minWidth: "250px", // Minimum width to ensure responsiveness
-            padding: "50px", // Add padding around each parking lot
+            flex: "1 1 30%", // Each parking lot takes 30% of the width
+            minWidth: "300px", // Minimum width to ensure responsiveness
+            padding: "20px", // Add padding around each parking lot
             boxSizing: "border-box",
           }}
         >

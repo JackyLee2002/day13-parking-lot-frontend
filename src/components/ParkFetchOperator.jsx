@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ParkingContext } from "../context/ParkingContext";
 import { TextField, Button, Grid, Box, Typography } from "@mui/material";
+import { parkCar, getParkingLots } from "../api/api";
 
 const ParkFetchOperator = () => {
   const { dispatch } = useContext(ParkingContext);
@@ -21,20 +22,28 @@ const ParkFetchOperator = () => {
     return regex.test(plate);
   };
 
-  const handlePark = () => {
+  const updateParkingLots = async () => {
+    let parkingLots = await getParkingLots();
+    dispatch({ type: "SET_PARKING_LOTS", payload: parkingLots });
+  };
+
+  const handlePark = async () => {
     if (!plateNumber || !validatePlateNumber(plateNumber)) {
       alert("Invalid or empty license plate number.");
       return;
     }
+    await parkCar(plateNumber, parkingType);
     dispatch({ type: "PARK_CAR", payload: { plateNumber, parkingType } });
+    await updateParkingLots();
   };
 
-  const handleFetch = () => {
+  const handleFetch = async () => {
     if (!plateNumber || !validatePlateNumber(plateNumber)) {
       alert("Invalid or empty license plate number.");
       return;
     }
     dispatch({ type: "FETCH_CAR", payload: { plateNumber } });
+    await updateParkingLots();
   };
 
   return (
@@ -72,8 +81,8 @@ const ParkFetchOperator = () => {
             }}
           >
             <option value="Standard">Standard</option>
-            <option value="VIP">VIP</option>
-            <option value="Handicapped">Handicapped</option>
+            <option value="Smart">Smart</option>
+            <option value="SuperSmart">SuperSmart</option>
           </TextField>
         </Grid>
         <Grid item xs={3}>

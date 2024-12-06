@@ -1,3 +1,6 @@
+### 
+Please create a react app that make use of useContext together with useContext for global state management, 
+
 
 ### Initial Load parking lot status
 Change whereever appropriate so that the app will call /parking-lots and update the result using the redux dispatch, if the dispatch doesnt have a action to set the parking lot status, please create one
@@ -29,3 +32,7 @@ Make it so that its component-based, I want ParkingLot Group to render a list of
 Make the css inline within Parking Lot using MUI to achieve that goal
 
 Now make it so that the parking Lots are flexed horizontally instead of vertically
+
+###
+make it so that each of the 3 parking lots in the parking lots group take 30% of the width and within each parking lot, make sure each slot can fit the text
+Change it so that after park or fetch, call the get /parking-lots api again to update the new UI states
