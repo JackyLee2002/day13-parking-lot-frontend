@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ParkingContext } from "../context/ParkingContext";
 import { TextField, Button, Grid, Box, Typography } from "@mui/material";
-import { parkCar, getParkingLots } from "../api/api";
+import { parkCar, getParkingLots, fetchCar } from "../api/api";
 
 const ParkFetchOperator = () => {
   const { dispatch } = useContext(ParkingContext);
@@ -32,9 +32,14 @@ const ParkFetchOperator = () => {
       alert("Invalid or empty license plate number.");
       return;
     }
-    await parkCar(plateNumber, parkingType);
-    dispatch({ type: "PARK_CAR", payload: { plateNumber, parkingType } });
-    await updateParkingLots();
+
+    try {
+      await parkCar(plateNumber, parkingType);
+      dispatch({ type: "PARK_CAR", payload: { plateNumber, parkingType } });
+      await updateParkingLots();
+    } catch (error) {
+      alert(`Car ${plateNumber} is already parked.`);
+    }
   };
 
   const handleFetch = async () => {
@@ -43,6 +48,7 @@ const ParkFetchOperator = () => {
       return;
     }
     dispatch({ type: "FETCH_CAR", payload: { plateNumber } });
+    await fetchCar(plateNumber);
     await updateParkingLots();
   };
 
